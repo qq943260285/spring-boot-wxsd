@@ -3,7 +3,6 @@ package com.xyzs.springbootwxsd.dataobj;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
