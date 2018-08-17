@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 
@@ -27,27 +28,29 @@ public class ProductCategoryRepositoryTest {
     }
 
     @Test
-    @Transactional //添加数据库后会删除 只做测试
+//    @Transactional //添加数据库后会删除 只做测试
     public void saveTest() {
         //创建
         ProductCategory productCategory = new ProductCategory();
         productCategory.setCategoryName("777");
         productCategory.setCategoryType(777);
+        productCategory.setCreateTime(new Date());
+        productCategory.setUpdateTime(new Date());
         ProductCategory save = productCategoryRepository.save(productCategory);
         Assert.assertNotNull(save);
     }
 
     @Test
-    @Transactional //添加数据库后会删除
+//    @Transactional //添加数据库后会删除
     public void updataTest() {
         //更新
-        ProductCategory productCategory = productCategoryRepository.findById(5).get();
+        ProductCategory productCategory = productCategoryRepository.findById(2).get();
         productCategory.setCategoryName("555");
         productCategory.setCategoryType(555);
         ProductCategory save = productCategoryRepository.save(productCategory);
 
         Assert.assertNotNull(save);
-        productCategory = productCategoryRepository.findById(5).get();
+        productCategory = productCategoryRepository.findById(2).get();
         System.out.println(productCategory);
     }
 
