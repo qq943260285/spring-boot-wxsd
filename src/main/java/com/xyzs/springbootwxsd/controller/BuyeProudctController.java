@@ -7,6 +7,7 @@ import com.xyzs.springbootwxsd.dataobj.ProductCategory;
 import com.xyzs.springbootwxsd.dataobj.ProductInfo;
 import com.xyzs.springbootwxsd.service.CategoryService;
 import com.xyzs.springbootwxsd.service.ProductService;
+import com.xyzs.springbootwxsd.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,15 +57,15 @@ public class BuyeProudctController {
             productVOs.add(productVO);
         });
 
-        ResultVO resultVO = new ResultVO();
-        resultVO.setCode(200);
-        resultVO.setMsg("成功");
-        resultVO.setData(productVOs);
+//        ResultVO resultVO = new ResultVO();
+//        resultVO.setCode(200);
+//        resultVO.setMsg("成功");
+//        resultVO.setData(productVOs);
 //        ProductVO productVO = new ProductVO();
 //        ProductInfoVO productInfoVO = new ProductInfoVO();
 //        productVO.setProductInfoVOList(Arrays.asList(productInfoVO));
 
 //        resultVO.setData(Arrays.asList(productVO));
-        return resultVO;
+        return ResultVOUtil.success(productVOs);
     }
 }
