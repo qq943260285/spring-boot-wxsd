@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,7 +30,9 @@ public class ProductInfoRepositoryTest {
         productInfo.setProductDescription("商品描述信息");
         productInfo.setProductIcon("小图");
         productInfo.setProductStatus(0);
-        productInfo.setCategoryType(1);
+        productInfo.setCategoryType(2);
+        productInfo.setCreateTime(new Date());
+        productInfo.setUpdateTime(new Date());
 
         ProductInfo result = productInfoRepository.save(productInfo);
         Assert.assertNotNull(result);

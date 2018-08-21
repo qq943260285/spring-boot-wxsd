@@ -3,18 +3,18 @@ package com.xyzs.springbootwxsd.enums;
 import lombok.Getter;
 
 /**
- * 商品状态
+ * 支付状态
  */
 @Getter
-public enum ProductStatusEnum {
+public enum PayStatusEnum {
     /**
-     * 在线商品
+     * 等待支付
      */
-    UP(0, "在线商品"),
+    WAIT(0, "等待支付"),
     /**
-     * 下架商品
+     * 支付成功
      */
-    DOWN(1, "下架商品");
+    SUCCESS(1, "支付成功");
 
     /**
      * 状态码
@@ -25,7 +25,7 @@ public enum ProductStatusEnum {
      */
     private String message;
 
-    ProductStatusEnum(Integer cade, String message) {
+    PayStatusEnum(Integer cade, String message) {
         this.cade = cade;
         this.message = message;
     }

@@ -50,9 +50,9 @@ public class ProductInfo {
     /**
      * 创建时间
      */
-    private Date create_time;//` timestamp not null default current_timestamp comment '创建时间',
+    private Date createTime;//` timestamp not null default current_timestamp comment '创建时间',
     /**
      * 修改时间
      */
-    private Date update_time;//` timestamp not null default current_timestamp on update current_timestamp comment '修改时间',
+    private Date updateTime;//` timestamp not null default current_timestamp on update current_timestamp comment '修改时间',
 }
