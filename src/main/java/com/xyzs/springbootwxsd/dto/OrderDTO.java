@@ -1,30 +1,21 @@
-package com.xyzs.springbootwxsd.dataobj;
+package com.xyzs.springbootwxsd.dto;
 
-import com.xyzs.springbootwxsd.enums.OrderStatusEnum;
-import com.xyzs.springbootwxsd.enums.PayStatusEnum;
+import com.xyzs.springbootwxsd.dataobj.OrderDetail;
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
+ * DTO:各层传输用对象
  * 订单
- *
- * @Author: 小宇专属
- * @Date: 2018/8/18 10:00
- * @Modify: 无
  */
-@Entity
 @Data
-@DynamicUpdate
-public class OrderMaster {
+public class OrderDTO {
     /**
      * 订单ID
      */
-    @Id
     private String orderId;
     /**
      * 买家名字
@@ -49,11 +40,11 @@ public class OrderMaster {
     /**
      * 订单状态，默认为新下单
      */
-    private Integer orderStatus = OrderStatusEnum.NEW.getCade();
+    private Integer orderStatus;
     /**
      * 支付状态
      */
-    private Integer payStatus = PayStatusEnum.WAIT.getCade();
+    private Integer payStatus;
     /**
      * 创建时间
      */
@@ -63,9 +54,8 @@ public class OrderMaster {
      */
     private Date updateTime;
 
-//    /**
-//     * 订单详情列表
-//     */
-//    @Transient //排除数据库字段
-//    private List<OrderDetail> orderDetailList;
+    /**
+     * 订单详情列表
+     */
+    private List<OrderDetail> orderDetailList;
 }
