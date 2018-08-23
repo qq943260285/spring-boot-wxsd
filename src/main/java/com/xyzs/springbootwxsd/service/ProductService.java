@@ -37,4 +37,7 @@ public interface ProductService {
      * @return
      */
     ProductInfo save(ProductInfo productInfo);
+
+
+//    void increaseStock(List<>)
 }
