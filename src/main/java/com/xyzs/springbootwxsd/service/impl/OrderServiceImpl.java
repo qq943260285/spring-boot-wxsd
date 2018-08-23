@@ -3,6 +3,7 @@ package com.xyzs.springbootwxsd.service.impl;
 import com.xyzs.springbootwxsd.dataobj.OrderDetail;
 import com.xyzs.springbootwxsd.dataobj.OrderMaster;
 import com.xyzs.springbootwxsd.dataobj.ProductInfo;
+import com.xyzs.springbootwxsd.dto.CartDTO;
 import com.xyzs.springbootwxsd.dto.OrderDTO;
 import com.xyzs.springbootwxsd.enums.ResultEnum;
 import com.xyzs.springbootwxsd.exception.SellException;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -39,6 +42,8 @@ public class OrderServiceImpl implements OrderService {
         //总价
         BigDecimal orderAmount = new BigDecimal(BigInteger.ZERO);
 
+        //购物车
+        List<CartDTO> cartDTOLint = new ArrayList<>();
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
             //1、查询商品单价 数量
             ProductInfo one = productService.findOne(orderDetail.getDetailId());
@@ -56,6 +61,10 @@ public class OrderServiceImpl implements OrderService {
             BeanUtils.copyProperties(one, orderDetail);
             orderDetailRepository.save(orderDetail);
 
+            CartDTO cartDTO = new CartDTO();
+            cartDTO.setProductId(orderDetail.getProductId());
+            cartDTO.setProductQuantity(orderDetail.getProductQuantity());
+            cartDTOLint.add(cartDTO);
         }
 
         OrderMaster orderMaster = new OrderMaster();
@@ -65,9 +74,10 @@ public class OrderServiceImpl implements OrderService {
         orderMasterRepository.save(orderMaster);
 
         //4、扣库存
+        productService.decreaseStock(cartDTOLint);
 
 
-        return null;
+        return orderDTO;
     }
 
     @Override

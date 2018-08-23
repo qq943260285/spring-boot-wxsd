@@ -1,6 +1,7 @@
 package com.xyzs.springbootwxsd.service;
 
 import com.xyzs.springbootwxsd.dataobj.ProductInfo;
+import com.xyzs.springbootwxsd.dto.CartDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -38,6 +39,18 @@ public interface ProductService {
      */
     ProductInfo save(ProductInfo productInfo);
 
+    /**
+     * 加库存
+     *
+     * @param cartDTOList
+     */
+    void increaseStock(List<CartDTO> cartDTOList);
 
-//    void increaseStock(List<>)
+    /**
+     * 减库存
+     *
+     * @param cartDTOList
+     */
+    void decreaseStock(List<CartDTO> cartDTOList);
+
 }
