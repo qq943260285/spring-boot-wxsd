@@ -8,10 +8,10 @@ import com.xyzs.springbootwxsd.exception.SellException;
 import com.xyzs.springbootwxsd.repository.ProductInfoRepository;
 import com.xyzs.springbootwxsd.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transient//事务
+    @Transactional//事务
     public void decreaseStock(List<CartDTO> cartDTOList) {
         for (CartDTO cartDto : cartDTOList) {
             ProductInfo productInfo = productInfoRepository.findById(cartDto.getProductId()).get();
