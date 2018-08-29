@@ -5,6 +5,8 @@ import com.xyzs.springbootwxsd.dataobj.OrderMaster;
 import com.xyzs.springbootwxsd.dataobj.ProductInfo;
 import com.xyzs.springbootwxsd.dto.CartDTO;
 import com.xyzs.springbootwxsd.dto.OrderDTO;
+import com.xyzs.springbootwxsd.enums.OrderStatusEnum;
+import com.xyzs.springbootwxsd.enums.PayStatusEnum;
 import com.xyzs.springbootwxsd.enums.ResultEnum;
 import com.xyzs.springbootwxsd.exception.SellException;
 import com.xyzs.springbootwxsd.repository.OrderDetailRepository;
@@ -21,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,13 +51,13 @@ public class OrderServiceImpl implements OrderService {
         List<CartDTO> cartDTOLint = new ArrayList<>();
         for (OrderDetail orderDetail : orderDTO.getOrderDetailList()) {
             //1、查询商品单价 数量
-            ProductInfo one = productService.findOne(orderDetail.getDetailId());
+            ProductInfo one = productService.findOne(orderDetail.getProductId());
             if (one == null) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
 
             //2、计算总价
-            orderAmount = orderDetail.getProductPrice()
+            orderAmount = one.getProductPrice()
                     .multiply(new BigDecimal(orderDetail.getProductQuantity())).add(orderAmount);
 
             //3、写入订单、订单详情
@@ -73,6 +76,10 @@ public class OrderServiceImpl implements OrderService {
         BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMaster.setOrderId(orderId);
         orderMaster.setOrderAmount(orderAmount);
+        orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCade());
+        orderMaster.setPayStatus(PayStatusEnum.WAIT.getCade());
+        orderMaster.setCreateTime(new Date());
+        orderMaster.setUpdateTime(new Date());
         orderMasterRepository.save(orderMaster);
 
         //4、扣库存
