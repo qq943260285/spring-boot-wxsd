@@ -26,6 +26,9 @@ public class BuyeProudctController {
     private ProductService productService;
 
     @GetMapping("/list")
+    /**
+     * 商品列表
+     */
     public ResultVO list() {
         //1.查询所有上架商品
         List<ProductInfo> upAll = productService.findUpAll();

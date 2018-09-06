@@ -1,6 +1,9 @@
 package com.xyzs.springbootwxsd.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.xyzs.springbootwxsd.dataobj.OrderDetail;
+import com.xyzs.springbootwxsd.utils.serializer.Date2LogSerializer;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,6 +15,7 @@ import java.util.List;
  * 订单
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)//为Null时不返还
 public class OrderDTO {
     /**
      * 订单ID
@@ -48,10 +52,12 @@ public class OrderDTO {
     /**
      * 创建时间
      */
+    @JsonSerialize(using = Date2LogSerializer.class)
     private Date createTime;
     /**
      * 更新时间
      */
+    @JsonSerialize(using = Date2LogSerializer.class)//定制返回的时间戳为秒
     private Date updateTime;
 
     /**

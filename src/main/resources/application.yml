@@ -6,8 +6,11 @@ spring:
 #    url: jdbc:mysql://127.0.0.1:3306/sell?user=root&password=root&characterEncoding=utf-8&useSSL=false
   jpa:
     show-sql: true
+  jackson:
+#    全局配置接口数据为null时不返回，不用逐一添加@JsonInclude
+    default-property-inclusion: non_null
 server:
   servlet:
   #URL前缀
     context-path: /sell
-  port: 8765
+  port: 9432

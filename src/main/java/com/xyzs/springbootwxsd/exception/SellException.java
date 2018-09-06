@@ -17,5 +17,10 @@ public class SellException extends RuntimeException {
 //        this.cade = cade;
 //        this.message = message;
     }
+
+    public SellException(Integer cade, String msg) {
+        super(msg);
+        this.cade = cade;
+    }
 }
 
